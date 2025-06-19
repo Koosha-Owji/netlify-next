@@ -6,8 +6,9 @@
   publish = ".next"
 
 [functions]
-  # Enable edge functions for Next.js middleware
-  edge_functions = true
+
+  [functions.edge_functions]
+  # Edge functions configuration for Next.js middleware
 
 [dev]
   command = "npm run dev"
