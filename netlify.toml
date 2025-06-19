@@ -1,14 +1,11 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+  [plugins.inputs]
+    edge_functions = false
 
 [build]
   command = "npm run build"
   publish = ".next"
-
-[functions]
-
-  [functions.edge_functions]
-  # Edge functions configuration for Next.js middleware
 
 [dev]
   command = "npm run dev"
