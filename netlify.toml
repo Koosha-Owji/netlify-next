@@ -1,0 +1,14 @@
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[functions]
+  # Enable edge functions for Next.js middleware
+  edge_functions = true
+
+[dev]
+  command = "npm run dev"
+  port = 3000 
