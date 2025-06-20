@@ -1,3 +1,4 @@
+export const runtime = 'nodejs';
 import {
   withAuth,
 } from "@kinde-oss/kinde-auth-nextjs/middleware";
