@@ -1,4 +1,3 @@
-export const runtime = 'nodejs';
 import {
   withAuth,
 } from "@kinde-oss/kinde-auth-nextjs/middleware";
@@ -13,6 +12,7 @@ export default withAuth(
 );
 
 export const config = {
+  runtime: "nodejs", // Specify the runtime environment as Node.js
   matcher: [
     // Run on everything but Next internals and static files
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)"
