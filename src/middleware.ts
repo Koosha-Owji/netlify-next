@@ -1,8 +1,16 @@
-import { NextRequest, NextResponse } from "next/server";
+export const runtime = 'nodejs';
+import {
+  withAuth,
+} from "@kinde-oss/kinde-auth-nextjs/middleware";
+import { NextRequest } from "next/server";
 
-export default async function middleware(req: NextRequest) {
-  return NextResponse.next();
-}
+export default withAuth(
+  async function middleware(req: NextRequest) {
+  },
+  {
+    publicPaths: ["/", "/api/public"],
+  }
+);
 
 export const config = {
   matcher: [
