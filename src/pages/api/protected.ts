@@ -1,16 +1,18 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export async function GET() {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { getUser, isAuthenticated } = getKindeServerSession();
 
   if (!(await isAuthenticated())) {
-    return new Response("Unauthorized", { status: 401 });
+    return res.status(401).json({ error: "Unauthorized" });
   }
 
   const user = await getUser();
   const data = { message: "Hello User", id: user?.given_name };
 
-  return NextResponse.json({ data });
+  return res.status(200).json({ data });
 }
-
