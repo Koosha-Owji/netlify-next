@@ -101,7 +101,7 @@
     "outputFileTracingRoot": "/Users/kooshaowji/Documents/GitHub/netlify-next",
     "experimental": {
       "useSkewCookie": false,
-      "nodeMiddleware": true,
+      "nodeMiddleware": false,
       "cacheLife": {
         "default": {
           "stale": 300,
@@ -173,7 +173,7 @@
       "disableOptimizedLoading": false,
       "gzipSize": true,
       "craCompat": false,
-      "esmExternals": true,
+      "esmExternals": "loose",
       "fullySpecified": false,
       "swcTraceProfiling": false,
       "forceSwcTransforms": false,

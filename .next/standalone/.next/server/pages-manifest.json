@@ -1,11 +1,12 @@
 {
+  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/api/auth/[...kindeAuth]": "pages/api/auth/[...kindeAuth].js",
   "/api/protected": "pages/api/protected.js",
   "/api/public": "pages/api/public.js",
+  "/api/test-env": "pages/api/test-env.js",
   "/": "pages/index.html",
   "/dashboard": "pages/dashboard.js",
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
   "/404": "pages/404.html"
 }

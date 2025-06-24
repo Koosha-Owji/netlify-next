@@ -9,7 +9,10 @@ import Link from "next/link";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { user, isAuthenticated } = pageProps.kindeAuth || {};
+  // Temporarily disable authentication for testing
+  // const { user, isAuthenticated } = pageProps.kindeAuth || {};
+  const user = null;
+  const isAuthenticated = false;
 
   return (
     <>
@@ -75,16 +78,17 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 export default MyApp;
 
-export async function getServerSideProps(context: any) {
-  const { isAuthenticated, getUser } = getKindeServerSession();
-  const user = await getUser();
+// Temporarily commented out for testing - this was causing server errors
+// export async function getServerSideProps(context: any) {
+//   const { isAuthenticated, getUser } = getKindeServerSession();
+//   const user = await getUser();
 
-  return {
-    props: {
-      kindeAuth: {
-        isAuthenticated: await isAuthenticated(),
-        user,
-      },
-    },
-  };
-}
+//   return {
+//     props: {
+//       kindeAuth: {
+//         isAuthenticated: await isAuthenticated(),
+//         user,
+//       },
+//     },
+//   };
+// }
