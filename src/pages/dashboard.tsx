@@ -1,17 +1,7 @@
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { NextApiRequest, NextApiResponse } from "next";
+import { GetServerSideProps } from "next";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-interface DashboardProps {
-  user: {
-    id: string;
-    email: string;
-    given_name: string;
-    family_name: string;
-  } | null;
-}
-
-export default function Dashboard({ user }: DashboardProps) {
+export default function Dashboard() {
   return (
     <div className="container">
       <div className="card start-hero">
@@ -21,14 +11,6 @@ export default function Dashboard({ user }: DashboardProps) {
           <br />
           Build the important stuff.
         </p>
-        {user && (
-          <div style={{ marginTop: '20px', padding: '10px', borderRadius: '5px' }}>
-            <p><strong>Server-side user data:</strong></p>
-            <p>Name: {user.given_name} {user.family_name}</p>
-            <p>Email: {user.email}</p>
-            <p>ID: {user.id}</p>
-          </div>
-        )}
       </div>
       <section className="next-steps-section">
         <h2 className="text-heading-1">Next steps for you</h2>
@@ -37,11 +19,8 @@ export default function Dashboard({ user }: DashboardProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { getUser, isAuthenticated } = getKindeServerSession(
-    context.req as NextApiRequest, 
-    context.res as NextApiResponse
-  );
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { isAuthenticated } = getKindeServerSession();
 
   if (!(await isAuthenticated())) {
     return {
@@ -52,16 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     };
   }
 
-  const user = await getUser();
-
   return {
-    props: {
-      user: user ? {
-        id: user.id,
-        email: user.email || '',
-        given_name: user.given_name || '',
-        family_name: user.family_name || '',
-      } : null,
-    },
+    props: {},
   };
 };
