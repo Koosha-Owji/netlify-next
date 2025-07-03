@@ -1,7 +1,7 @@
 import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
 
 export default withAuth(async function middleware() {}, {
-  publicPaths: ["/", "/api/public", "/api/auth"],
+  publicPaths: ["/api/auth", /^(?!\/dashboard).*$/],
 });
 
 export const config = {
