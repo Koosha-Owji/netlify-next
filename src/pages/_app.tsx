@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
 }
 
 function AppContent({ Component, pageProps }: AppProps) {
-  const { user, isAuthenticated } = useKindeAuth();
+  const { user, isAuthenticated, isLoading } = useKindeAuth();
 
   return (
     <>
@@ -27,7 +27,9 @@ function AppContent({ Component, pageProps }: AppProps) {
         <nav className="nav container">
           <h1 className="text-display-3">KindeAuth</h1>
           <div>
-            {!isAuthenticated ? (
+            {isLoading ? (
+              <div>Loading...</div>
+            ) : !isAuthenticated ? (
               <>
                 <LoginLink className="btn btn-ghost sign-in-btn">
                   Sign in
