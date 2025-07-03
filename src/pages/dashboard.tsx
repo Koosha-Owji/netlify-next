@@ -1,4 +1,4 @@
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
@@ -22,7 +22,7 @@ export default function Dashboard({ user }: DashboardProps) {
           Build the important stuff.
         </p>
         {user && (
-          <div style={{ marginTop: '20px', padding: '10px', background: '#f0f0f0', borderRadius: '5px' }}>
+          <div style={{ marginTop: '20px', padding: '10px', borderRadius: '5px' }}>
             <p><strong>Server-side user data:</strong></p>
             <p>Name: {user.given_name} {user.family_name}</p>
             <p>Email: {user.email}</p>
@@ -37,7 +37,7 @@ export default function Dashboard({ user }: DashboardProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const { getUser, isAuthenticated } = getKindeServerSession(
     context.req as NextApiRequest, 
     context.res as NextApiResponse

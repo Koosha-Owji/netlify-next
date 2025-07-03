@@ -1,3 +1,4 @@
+import React from "react";
 import { AppProps } from "next/app";
 import { KindeProvider } from "@kinde-oss/kinde-auth-nextjs";
 import {
@@ -18,21 +19,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
 }
 
 function AppContent({ Component, pageProps }: AppProps) {
-  const { user, isAuthenticated, isLoading, error } = useKindeAuth();
-
-  // DEBUG: Let's see what's happening
-  console.log("🔍 DEBUG AUTH STATE:", {
-    isAuthenticated,
-    isLoading,
-    error,
-    user,
-    hasUser: !!user,
-    userName: user?.given_name
-  });
-
-  if (isLoading) {
-    return <div>Loading authentication...</div>;
-  }
+  const { user, isAuthenticated } = useKindeAuth();
 
   return (
     <>
@@ -40,13 +27,6 @@ function AppContent({ Component, pageProps }: AppProps) {
         <nav className="nav container">
           <h1 className="text-display-3">KindeAuth</h1>
           <div>
-            {/* DEBUG: Show current auth state */}
-            <small style={{marginRight: '10px', color: '#666'}}>
-              Auth: {isAuthenticated ? '✅ YES' : '❌ NO'} | 
-              Loading: {isLoading ? 'YES' : 'NO'} | 
-              User: {user?.given_name || 'None'}
-            </small>
-            
             {!isAuthenticated ? (
               <>
                 <LoginLink className="btn btn-ghost sign-in-btn">
