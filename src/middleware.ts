@@ -1,16 +1,7 @@
-// ts-nocheck
 import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
 
-export default withAuth(async function middleware(req) {
-  console.log('🚀 MIDDLEWARE EXECUTING:', req.nextUrl.pathname);
-  console.log('🌍 Environment check:', {
-    hasWindow: typeof window !== 'undefined',
-    hasDeno: typeof (globalThis as any).Deno !== 'undefined',
-    hasProcess: typeof process !== 'undefined'
-  });
-  return; // Let withAuth handle the rest
-}, {
-  publicPaths: ["/", "/api/public", "/api/auth", "/api/test-env"],
+export default withAuth(async function middleware() {}, {
+  publicPaths: ["/", "/api/public", "/api/auth"],
 });
 
 export const config = {

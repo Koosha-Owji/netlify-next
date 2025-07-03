@@ -13,11 +13,6 @@
     }
   ],
   "headers": [],
-  "rewrites": {
-    "beforeFiles": [],
-    "afterFiles": [],
-    "fallback": []
-  },
   "dynamicRoutes": [
     {
       "page": "/api/auth/[...kindeAuth]",
@@ -45,7 +40,7 @@
   "dataRoutes": [
     {
       "page": "/dashboard",
-      "dataRouteRegex": "^/_next/data/BWCIksyNhKEtUAZaHDKk_/dashboard\\.json$"
+      "dataRouteRegex": "^/_next/data/THxJeIlWYXXt7F\\-Sqb152/dashboard\\.json$"
     }
   ],
   "rsc": {
@@ -63,5 +58,6 @@
   "rewriteHeaders": {
     "pathHeader": "x-nextjs-rewritten-path",
     "queryHeader": "x-nextjs-rewritten-query"
-  }
+  },
+  "rewrites": []
 }
