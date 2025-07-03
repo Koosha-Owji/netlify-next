@@ -10,7 +10,7 @@ interface DashboardProps {
   } | null;
 }
 
-export default function Dashboard() {
+export default function Dashboard({ user }: DashboardProps) {
   return (
     <div className="container">
       <div className="card start-hero">
@@ -20,6 +20,14 @@ export default function Dashboard() {
           <br />
           Build the important stuff.
         </p>
+        {user && (
+          <div style={{ marginTop: '20px', padding: '10px', background: '#f0f0f0', borderRadius: '5px' }}>
+            <p><strong>Server-side user data:</strong></p>
+            <p>Name: {user.given_name} {user.family_name}</p>
+            <p>Email: {user.email}</p>
+            <p>ID: {user.id}</p>
+          </div>
+        )}
       </div>
       <section className="next-steps-section">
         <h2 className="text-heading-1">Next steps for you</h2>
@@ -29,10 +37,19 @@ export default function Dashboard() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { getUser } = getKindeServerSession(
+  const { getUser, isAuthenticated } = getKindeServerSession(
     context.req as NextApiRequest,
     context.res as NextApiResponse
   );
+
+  if (!(await isAuthenticated())) {
+    return {
+      redirect: {
+        destination: "/api/auth/login",
+        permanent: false,
+      },
+    };
+  }
 
   const user = await getUser();
 
