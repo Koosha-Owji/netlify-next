@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { GetServerSideProps } from "next";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default function Home() {
   return (
@@ -21,3 +24,26 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { getUser, isAuthenticated } = getKindeServerSession(
+    context.req as NextApiRequest,
+    context.res as NextApiResponse
+  );
+
+  const user = await getUser();
+  const authenticated = await isAuthenticated();
+
+  return {
+    props: {
+      user: user ? {
+        id: user.id,
+        email: user.email || '',
+        given_name: user.given_name || '',
+        family_name: user.family_name || '',
+        picture: user.picture || '',
+      } : null,
+      isAuthenticated: authenticated,
+    },
+  };
+};

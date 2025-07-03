@@ -60,7 +60,9 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
         email: user.email || '',
         given_name: user.given_name || '',
         family_name: user.family_name || '',
+        picture: user.picture || '',
       } : null,
+      isAuthenticated: true, // If we reach here, user is authenticated
     },
   };
 };

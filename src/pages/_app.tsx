@@ -1,25 +1,16 @@
 import React from "react";
 import { AppProps } from "next/app";
-import { KindeProvider } from "@kinde-oss/kinde-auth-nextjs";
 import {
   RegisterLink,
   LoginLink,
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
-import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
 import "../styles/globals.css";
 
-function MyApp({ Component, pageProps, router }: AppProps) {
-  return (
-    <KindeProvider>
-      <AppContent Component={Component} pageProps={pageProps} router={router} />
-    </KindeProvider>
-  );
-}
-
-function AppContent({ Component, pageProps }: AppProps) {
-  const { user, isAuthenticated, isLoading } = useKindeAuth();
+function MyApp({ Component, pageProps }: AppProps) {
+  // Get auth state from server-side props if available
+  const { user, isAuthenticated } = pageProps;
 
   return (
     <>
@@ -27,9 +18,7 @@ function AppContent({ Component, pageProps }: AppProps) {
         <nav className="nav container">
           <h1 className="text-display-3">KindeAuth</h1>
           <div>
-            {isLoading ? (
-              <div>Loading...</div>
-            ) : !isAuthenticated ? (
+            {!isAuthenticated ? (
               <>
                 <LoginLink className="btn btn-ghost sign-in-btn">
                   Sign in
